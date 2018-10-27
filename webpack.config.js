@@ -1,106 +1,24 @@
-const path = require('path');
-//const _ = require('lodash');
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const _const_module = {
-    rules: [
-        {
-            test: /\.(js|jsx)$/,
-            exclude: /node_modules/,
-            use: {
-                loader: "babel-loader"
-            }
-        },
-        {
-            test: /\.html$/,
-            use: [
-                {
-                    loader: "html-loader",
-                    options: {minimize: true}
-                }
-            ]
-        },
-        {
-            test: /\.css$/,
-            use: [MiniCssExtractPlugin.loader, "css-loader"]
-        }
-    ]
-};
-module.exports = [
-    {
-        // 入口文件
-        entry: {
-            pageOne: './src/pageOne/pageOne.js',
-        },
-        output: {
-            filename: 'script/[name].js',
-            path: path.resolve(__dirname, 'dist'),
-        },
-        module: _const_module,
-        plugins: [
 
-            new HtmlWebPackPlugin({
-                files: {
-                    js: ["script/pageOne.js"]
-                },
-                template: "./src/pageOne/pageOne.html",
-                filename: "./pageOne/pageOne.html"
-            }),
-            new MiniCssExtractPlugin({
-                filename: "[name].css",
-                chunkFilename: "[id].css"
-            })
-        ]
-    },
-    {
-        // 入口文件
-        entry: {
-
-            pageTwo: './src/pageTwo/pageTwo.js'
-
-        },
-        output: {
-            filename: 'script/[name].js',
-            path: path.resolve(__dirname, 'dist'),
-        },
-        module: _const_module,
-        plugins: [
-
-            new HtmlWebPackPlugin({
-                files: {
-                    js: ["script/pageTwo.js"]
-                },
-                template: "./src/pageTwo/pageTwo.html",
-                filename: "./pageTwo/pageTwo.html"
-            }),
-            new MiniCssExtractPlugin({
-                filename: "[name].css",
-                chunkFilename: "[id].css"
-            })
-        ]
-    },
-    {
-        // 入口文件
-        entry: {
-            pageThree: './src/pageThree/pageThree.js'
-        },
-        output: {
-            filename: 'script/[name].js',
-            path: path.resolve(__dirname, 'dist'),
-        },
-        module: _const_module,
-        plugins: [
-            new HtmlWebPackPlugin({
-                files: {
-                    js: ["script/pageThree.js"]
-                },
-                template: "./src/pageThree/pageThree.html",
-                filename: "./pageThree/pageThree.html"
-            }),
-            new MiniCssExtractPlugin({
-                filename: "[name].css",
-                chunkFilename: "[id].css"
-            })
-        ]
-    }
-    ];
+const  util = require("./conf/webpack.config.common");
+util.configUtil.basePath=__dirname;
+const  packages=[];
+packages.push(util.configUtil.addPack("pageOne",{
+    srcDir:"./src/pageOne",
+    jsFileName: "pageOne.js",
+    htmlFile:"pageOne.html",
+    targetDir: "./dist/pageOne"
+}));
+packages.push(util.configUtil.addPack("pageTwo",{
+    srcDir:"./src/pageTwo",
+    jsFileName: "pageTwo.js",
+    htmlFile:"pageTwo.html",
+    targetDir: "./dist/pageTwo"
+}));
+packages.push(util.configUtil.addPack("pageThree",{
+    srcDir:"./src/pageThree",
+    jsFileName: "pageThree.js",
+    htmlFile:"pageThree.html",
+    targetDir: "./dist/pageThree"
+}));
+//console.log(JSON.stringify(packages));
+module.exports = packages;

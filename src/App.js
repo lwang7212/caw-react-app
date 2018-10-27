@@ -10,3 +10,4 @@ function tick() {
     ReactDOM.render(element, document.getElementById('app'));
 }
 setInterval(tick, 1000);
+
