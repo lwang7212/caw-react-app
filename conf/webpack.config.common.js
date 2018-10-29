@@ -1,8 +1,8 @@
-const path = require('path');
-const _ = require('lodash');
+//const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const   baseConf = function () {
+const baseConf = function () {
     return {
         entry: {},
         module: {
@@ -37,33 +37,47 @@ const   baseConf = function () {
         ]
     }
 };
-const  baseModelOption = function () {
-    return {
-        srcDir: "./src/",
-        jsFileName: "index.js",
-        htmlFile: "index.html",
-        targetDir: "./dist/"
-    }
-};
-const webpackUtil = {
-    basePath:__dirname,
-    addPack: function ( modeKey,modelOption) {
+let base = function () {
+    let me = this;
+    let _module = [];
+    /**
+     * 按回调函数设定包
+     * @param fn
+     * @returns {base}
+     */
+    me.addPack = function (fn) {
+        let config = baseConf();
+        fn.call(me, config);
+        _module.push(config);
+        return me;
+    };
+    /**
+     * 安装默认约定添加模块
+     * @param packName
+     * @returns {*}
+     */
+    me.addDefault = function (packName) {
+        let pack = baseConf();
+        //项目根目录 __dirname 是相对于当前模块文件的路径
+        let projPath = path.resolve(__dirname, '../');
 
-        let opt = Object.assign( baseModelOption(),modelOption);
-        let config =Object.assign({},baseConf());
-       // console.log(JSON.stringify(config));
-        config.entry[modeKey]= `./${opt.srcDir}/${opt.jsFileName}`;
-        config.output = {
-             filename: `${opt.jsFileName}`,
-             path: path.resolve(webpackUtil.basePath, opt.targetDir) ,
+        pack.entry = {
+            pageOne: `./src/${packName}/scripts/index.js`
         };
-        config.plugins.push(new HtmlWebPackPlugin({
-            template: `./${opt.srcDir}/${opt.htmlFile}`,
-            filename: `./${opt.htmlFile}`,
+        pack.output = {
+            filename: "index.js",
+            path: path.resolve(projPath, `dist/${packName}/scripts`),
+        };
+        pack.plugins.push(new HtmlWebPackPlugin({
+            template: `./src/${packName}/index.html`,
+            filename: `../index.html`,
         }));
-        console.log(JSON.stringify(config));
-        return config;
-
-    }
+        _module.push(pack);
+        return me;
+    };
+    me.toPackage = function () {
+        return _module;
+    };
+    return me;
 };
-module.exports = {configUtil: webpackUtil};
+module.exports = base();
