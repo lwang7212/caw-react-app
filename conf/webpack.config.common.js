@@ -25,14 +25,17 @@ const baseConf = function () {
                 },
                 {
                     test: /\.css$/,
-                    use: [MiniCssExtractPlugin.loader, "css-loader"]
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        "css-loader"
+                    ]
                 }
             ]
         },
         plugins: [
             new MiniCssExtractPlugin({
                 filename: "[name].css",
-                chunkFilename: "[id].css"
+                chunkFilename: "../css/[id].css"
             })
         ]
     }

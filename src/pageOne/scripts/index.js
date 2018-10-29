@@ -1,5 +1,8 @@
 import ReactDOM from "react-dom";
 import React from "react";
+import style from "../css/app.css"
+import style2  from "../css/App2.css";
+
 function tick() {
     const element = (
         <div>
