@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open"
+    "start": "webpack-dev-server  --content-base ./dist  --mode development --open"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,7 @@
     "mini-css-extract-plugin": "^0.4.4",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-grid-layout": "^0.16.6",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"

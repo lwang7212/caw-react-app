@@ -62,19 +62,25 @@ let base = function () {
     me.addDefault = function (packName) {
         let pack = baseConf();
         //项目根目录 __dirname 是相对于当前模块文件的路径
-        let projPath = path.resolve(__dirname, '../');
-
+        let rootPath = path.resolve(__dirname, '../');
+        console.log(`包[${packName}]projPath路径为${rootPath}`)
         pack.entry = {
             pageOne: `./src/${packName}/scripts/index.js`
         };
         pack.output = {
             filename: "index.js",
-            path: path.resolve(projPath, `dist/${packName}/scripts`),
+            path: path.resolve(rootPath, `dist/${packName}/scripts`),
         };
+        console.log(`包[${packName}]output>>` + JSON.stringify(pack.output));
+
         pack.plugins.push(new HtmlWebPackPlugin({
             template: `./src/${packName}/index.html`,
-            filename: `../index.html`,
+            filename: "../index.html"
         }));
+        //dev server 配置
+        /* pack.devServer= {
+              contentBase: `./dist/${packName}`
+          },*/
         _module.push(pack);
         return me;
     };

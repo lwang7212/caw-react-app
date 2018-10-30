@@ -1,3 +1,10 @@
 #app {
     background-color: aquamarine;
 }
+.react-layout-components--box {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
