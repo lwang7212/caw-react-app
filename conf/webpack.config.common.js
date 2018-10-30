@@ -63,10 +63,9 @@ let base = function () {
         let pack = baseConf();
         //项目根目录 __dirname 是相对于当前模块文件的路径
         let rootPath = path.resolve(__dirname, '../');
-        console.log(`包[${packName}]projPath路径为${rootPath}`)
-        pack.entry = {
-            pageOne: `./src/${packName}/scripts/index.js`
-        };
+        console.log(`包[${packName}]projPath路径为${rootPath}`);
+        pack.entry={}
+        pack.entry[packName] = `./src/${packName}/scripts/index.js`;
         pack.output = {
             filename: "index.js",
             path: path.resolve(rootPath, `dist/${packName}/scripts`),

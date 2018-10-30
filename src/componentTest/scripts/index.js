@@ -5,10 +5,10 @@ import React from "react";
 }*/
 class Welcome extends React.Component {
     render() {
-        return <h1>Hello, {this.props.name}</h1>;
+        return <h1>Hello,sadfdsa  ddd{this.props.name}</h1>;
     }
 }
 ReactDOM.render(
-    <Welcome name="wanglei " />,
+    <Welcome name="wanglei d3 js" />,
     document.getElementById('root')
 );
