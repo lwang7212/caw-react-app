@@ -16,14 +16,14 @@ const baseConf = function () {
                 },
                 {
                     test: /\.html$/,
-                    use: [
+                   /* use: [
                         {
                             loader: "html-loader",
                             options: {
                                 minimize: true,
                             }
                         }
-                    ]
+                    ]*/
                 },
                 {
                     test: /\.css$/,
@@ -92,7 +92,7 @@ let base = function () {
 
         pack.plugins.push(new HtmlWebPackPlugin({
             template: `./src/${packName}/index.html`,
-            filename: "../index.ejs",
+            filename: "../index.html",
             title: p_title,
             inject: true,
         }));

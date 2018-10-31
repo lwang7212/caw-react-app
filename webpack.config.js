@@ -14,7 +14,7 @@ module.exports = util.addDefault("componentTest","组件测试")
             path: path.resolve(__dirname, "./dist/assets/scripts"),
         };
         pack.plugins.push(new HtmlWebPackPlugin({
-            template: `./src/index.ejs`,
+            template: `./src/index.html`,
             filename: "../../index.html",
             title:"欢迎使用webpack-react-demo",
         }));
