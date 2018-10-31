@@ -25,9 +25,7 @@ class Dvc extends React.Component {
     }
 
     componentDidMount() {
-        // debugger;
-        //let _data = arc();
-        let svg = d3.select('#theChart').append('svg')
+       d3.select('#theChart').append('svg')
             .style('width', 500)
             .style('height', 500 * 0.9)
             .on('click', () => {
@@ -37,7 +35,6 @@ class Dvc extends React.Component {
             .attr("transform","translate(300, 110)")
             .append('path')
             .attr('d', pathdata);
-
     }
 
     componentWillUnmount() {
