@@ -3,10 +3,10 @@ import React from "react";
 function tick() {
     const element = (
         <div>
-            <h1>Hello wanglei dasdsaThree!</h1>
+            <h1>Hello, world Page Three!</h1>
             <h2>It is {new Date().toLocaleTimeString()}.</h2>
         </div>
     );
-    ReactDOM.render(element, document.getElementById('app'));
+    ReactDOM.render(element, document.getElementById('root'));
 }
 setInterval(tick, 1000);
