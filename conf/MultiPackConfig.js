@@ -1,3 +1,12 @@
+/**
+ * 支持多模块配置，
+ * 默认模块定义如下
+ * src/{模块名}
+ *      /scripts/index.jsx
+ *      /css
+ *      index.html
+ * @type {module:path}
+ */
 const path = require('path');
 const fs = require('fs');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -42,7 +51,7 @@ const baseConf = function () {
         ]
     }
 };
-let base = function () {
+let MuliPackConfig = function () {
     let me = this;
     let _module = [];
     let _mainfest = [];
@@ -52,6 +61,10 @@ let base = function () {
      * @private
      */
     let _addMainfest = function (pack) {
+        if(pack.entry.main  !== undefined)
+        {
+            return;
+        }
         pack.plugins.filter(item => !(item.options.title === undefined))
             .forEach(item => {
                 _mainfest.push({
@@ -83,7 +96,7 @@ let base = function () {
         let rootPath = path.resolve(__dirname, '../');
         console.log(`包[${packName}]projPath路径为${rootPath}`);
         pack.entry = {}
-        pack.entry[packName] = `./src/${packName}/scripts/index.js`;
+        pack.entry[packName] = `./src/${packName}/scripts/index.jsx`;
         pack.output = {
             filename: "index.js",
             path: path.resolve(rootPath, `dist/${packName}/scripts`),
@@ -96,11 +109,6 @@ let base = function () {
             title: p_title,
             inject: true,
         }));
-
-        //dev server 配置
-        /* pack.devServer= {
-              contentBase: `./dist/${packName}`
-          },*/
         _module.push(pack);
         _addMainfest.call(this, pack);
         return me;
@@ -130,4 +138,4 @@ let base = function () {
     };
     return me;
 };
-module.exports = base();
+module.exports = MuliPackConfig();
