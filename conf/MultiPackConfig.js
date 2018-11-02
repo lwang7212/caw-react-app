@@ -2,7 +2,7 @@
  * 支持多模块配置，
  * 默认模块定义如下
  * src/{模块名}
- *      /scripts/index.jsx
+ *      /index.jsx
  *      /css
  *      index.html
  *      文件夹及文件名命名规范
@@ -102,16 +102,16 @@ let MuliPackConfig = function () {
         let rootPath = path.resolve(__dirname, '../');
         console.log(`包[${packName}]projPath路径为${rootPath}`);
         pack.entry = {}
-        pack.entry[packName] = `./src/${packName}/scripts/index.jsx`;
+        pack.entry[packName] = `./src/${packName}/index.jsx`;
         pack.output = {
             filename: "index.js",
-            path: path.resolve(rootPath, `dist/${packName}/scripts`),
+            path: path.resolve(rootPath, `dist/${packName}`),
         };
         console.log(`包[${packName}]output>>` + JSON.stringify(pack.output));
 
         pack.plugins.push(new HtmlWebPackPlugin({
             template: `./src/${packName}/index.html`,
-            filename: "../index.html",
+            filename: "index.html",
             title: p_title,
             inject: true,
         }));
