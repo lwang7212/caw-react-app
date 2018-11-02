@@ -1,5 +1,10 @@
 import ReactDOM from "react-dom";
 import React from "react";
+import  Uitls from  "Utilities/Uitls";
+let aa = 1;
+
+console.log(Uitls.isEmpty(aa));
+debugger;
 class NameForm extends React.Component {
 
     render() {

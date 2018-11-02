@@ -1,4 +1,4 @@
-import  Uitls from "./Uitls";
+import  Uitls from "./utilities/Uitls";
 const util = new Uitls()
 //const  Uitls=require("../shared/Uitls");
 let aa = 1;

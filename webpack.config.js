@@ -2,12 +2,12 @@ const MultiPackConfig = require("./conf/MultiPackConfig");
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-module.exports = MultiPackConfig.addDefault("componentTest","组件测试")
-    .addDefault("pageOne","多页面测试一")
-    .addDefault("pageTwo","多页面测试二")
-    .addDefault("pageThree","多页面测试三")
-    .addDefault("helloD3","d3js测试")
-    .addPack(pack=>{
+const packs = MultiPackConfig.addDefault("componentTest", "组件测试")
+    .addDefault("pageOne", "多页面测试一")
+    .addDefault("pageTwo", "多页面测试二")
+    .addDefault("pageThree", "多页面测试三")
+    .addDefault("helloD3", "d3js测试")
+    .addPack(pack => {
         pack.entry.main = `./src/assets/index.jsx`;
         pack.output = {
             filename: "index.js",
@@ -16,7 +16,18 @@ module.exports = MultiPackConfig.addDefault("componentTest","组件测试")
         pack.plugins.push(new HtmlWebPackPlugin({
             template: `./src/index.html`,
             filename: "../../index.html",
-            title:"欢迎使用webpack-react-demo",
+            title: "欢迎使用webpack-react-demo",
         }));
     })
-    .toPackage(true);
+   .forEach(pack => {
+       //提供路径别名映射
+        pack.resolve = {
+            alias: {
+                Utilities: path.resolve(__dirname, 'src/shared/utilities/'),
+                Components: path.resolve(__dirname, 'src/shared/components/'),
+                icons: path.resolve(__dirname, 'src/assets/icons'),
+                "css-style": path.resolve(__dirname, 'src/assets/css')
+            }
+        }
+    }) .toPackage(true);
+module.exports = packs;

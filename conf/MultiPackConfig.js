@@ -5,6 +5,10 @@
  *      /scripts/index.jsx
  *      /css
  *      index.html
+ *      文件夹及文件名命名规范
+ *         静态文件存放目录：所有文件及文件夹命名均为小写
+ *         页面存放目录：文件夹命名均首字母大写
+ *         公用组件及辅助类：所有文件及文件夹命名均为小写
  * @type {module:path}
  */
 const path = require('path');
@@ -44,11 +48,12 @@ const baseConf = function () {
             ]
         },
         plugins: [
+           // CopyWebpackPlugin
             new MiniCssExtractPlugin({
                 filename: "[name].css",
                 chunkFilename: "../css/[id].css"
             })
-        ]
+        ],
     }
 };
 let MuliPackConfig = function () {
@@ -85,6 +90,7 @@ let MuliPackConfig = function () {
         _addMainfest.call(this, config);
         return me;
     };
+
     /**
      * 安装默认约定添加模块
      * @param packName
@@ -113,6 +119,11 @@ let MuliPackConfig = function () {
         _addMainfest.call(this, pack);
         return me;
     };
+   me.forEach=function(fn)
+   {
+       _module.forEach(fn);
+       return me;
+   },
     me.toPackage = function (flag = false) {
         //写出清单文件
         if (flag) {
