@@ -1,8 +1,7 @@
 import ReactDOM from "react-dom";
 import React from "react";
-import  style from "../css/style.css";
+import  style from "./css/style.css";
 
-Object.assign(style.test,{"font-size":"14px"});
 
 class Card extends React.Component {
     constructor(props) {

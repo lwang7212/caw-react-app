@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import React from 'react';
 import * as d3 from 'd3';
-import style from "../css/myStyle.css";
+import style from "./css/myStyle.css";
 import {scaleOrdinal} from 'd3-scale';
 //import {arc as d3Arc, pie as d3Pie} from 'd3-shape';
 // 在id为‘theChart’的标签内创建svg

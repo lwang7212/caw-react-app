@@ -17,7 +17,7 @@ const packs = MultiPackConfig.addDefault("componentTest", "组件测试")
         };
         pack.plugins.push(new HtmlWebPackPlugin({
             template: `./src/index.html`,
-            filename: "../../index.html",
+            filename: "../index.html",
             title: "欢迎使用webpack-react-demo",
         }));
     })

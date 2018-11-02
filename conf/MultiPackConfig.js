@@ -101,7 +101,7 @@ let MuliPackConfig = function () {
         //项目根目录 __dirname 是相对于当前模块文件的路径
         let rootPath = path.resolve(__dirname, '../');
         console.log(`包[${packName}]projPath路径为${rootPath}`);
-        pack.entry = {}
+        pack.entry = {};
         pack.entry[packName] = `./src/${packName}/index.jsx`;
         pack.output = {
             filename: "index.js",
