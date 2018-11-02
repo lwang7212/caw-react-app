@@ -1,0 +1,72 @@
+.rowCenter{
+    display:flex;flex-direction:row;justify-content:center;
+    align-items:center;
+}
+.rowCenterStart{
+    display:flex;flex-direction:row;justify-content:center;
+    align-items:flex-start;
+}
+.rowSpaceAround{
+    display:flex;flex-direction:row;justify-content:space-around;
+    align-items:center;
+}
+.rowAroundAround{
+    display:flex;flex-direction:row;justify-content:space-around;
+    align-items:baseline;
+}
+.rowStart{
+    display:flex;flex-direction:row;justify-content:flex-start;
+    align-items:center;
+}
+.rowStartWrap{
+    display:flex;flex-direction:row;justify-content:flex-start;
+    align-items:center;flex-wrap: wrap;
+}
+.rowFlexEnd{
+    display:flex;flex-direction:row;justify-content:flex-end;
+    align-items:center;
+}
+.rowFlexStartEnd{
+    display:flex;flex-direction:row;justify-content:flex-start;
+    align-items: flex-end;
+}
+.rowSpaceBetween{
+    display:flex;flex-direction:row;justify-content: space-between ;
+    align-items:center;
+}
+.columnCenter{
+    display:flex;flex-direction:column;justify-content:center;
+    align-items:center;
+}
+.columnStartStart{
+    display:flex;flex-direction:column;justify-content:flex-start;
+    align-items:flex-start;
+}
+.columnStartCenter{
+    display:flex;flex-direction:column;justify-content:flex-start;
+    align-items:center;
+}
+.columnCenterStart{
+    display:flex;flex-direction:column;justify-content:center;
+    align-items:flex-start;
+}
+.columnCenterAround{
+    display:flex;flex-direction:column;justify-content:center;
+    align-items:space-around;
+}
+.columnEnd{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    align-items:center;
+}
+.columnEndStart{
+    display:flex;flex-direction:column;justify-content:flex-end;
+    align-items:flex-start;
+}
+.columnSpaceAround{
+    display:flex;flex-direction:column;justify-content:space-around;
+    align-items:center;
+}
+.columnSpaceStart{
+    display:flex;flex-direction:column;justify-content:space-around;
+    align-items:flex-start;
+}
