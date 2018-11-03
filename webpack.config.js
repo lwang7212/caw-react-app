@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const packs = MultiPackConfig.addDefault("componentTest", "组件测试")
     .addDefault("pageOne", "多页面测试一")
     .addDefault("pageTwo", "多页面测试二")
-    .addDefault("pageThree", "多页面测试三")
+    .addDefault("Navigation", "导航栏测试")
     .addDefault("helloD3", "d3js测试")
     .addDefault("pageLayout","react布局测试")
     .addDefault("styled-components-demo","样式组件demo")
