@@ -2,18 +2,19 @@ const MultiPackConfig = require("./conf/MultiPackConfig");
 const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-const packs = MultiPackConfig.addDefault("componentTest", "组件测试")
+const packs = MultiPackConfig
+    /*.addDefault("componentTest", "组件测试")
     .addDefault("pageOne", "多页面测试一")
-    .addDefault("pageTwo", "多页面测试二")
+    .addDefault("pageTwo", "多页面测试二")*/
     .addDefault("Navigation", "导航栏测试")
-    .addDefault("helloD3", "d3js测试")
-    .addDefault("pageLayout","react布局测试")
+   /* .addDefault("helloD3", "d3js测试")
+    .addDefault("pageLayout","react布局测试")*/
     .addDefault("styled-components-demo","样式组件demo")
     .addPack(pack => {
         pack.entry.main = `./src/assets/index.jsx`;
         pack.output = {
             filename: "index.js",
-            path: path.resolve(__dirname, "./dist/assets/scripts"),
+            path: path.resolve(__dirname, "./dist/assets"),
         };
         pack.plugins.push(new HtmlWebPackPlugin({
             template: `./src/index.html`,

@@ -1,0 +1,32 @@
+/**
+侧边栏容器包装类
+ */
+.containerWarp{
+    flex: 0 0 auto;
+    background-color: #4c4957;
+    display: flex;
+    flex-direction: row;
+    border-right: 1px solid black;
+    color: #fff;
+}
+/**
+ 左边样式
+ */
+.Sidebar{
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    height: auto;
+    background: #B4D3F7;
+    flex-grow: 0;
+}
+/**
+布局主内容容器
+ */
+.tabContainer{
+    margin-left: 10px;
+    width: auto;
+    height: 200px;
+    background: #F7E8B4;
+    flex-grow: 1;
+}

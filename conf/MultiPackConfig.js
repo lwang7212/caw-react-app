@@ -29,26 +29,52 @@ const baseConf = function () {
                 },
                 {
                     test: /\.html$/,
-                   /* use: [
-                        {
-                            loader: "html-loader",
-                            options: {
-                                minimize: true,
-                            }
-                        }
-                    ]*/
+                    /*
+                    //
+                    use: [
+                         {
+                             loader: "html-loader",
+                             options: {
+                                 minimize: true,
+                             }
+                         }
+                     ]*/
                 },
+
                 {
                     test: /\.css$/,
                     use: [
                         MiniCssExtractPlugin.loader,
-                        "css-loader"
+                        {
+                            loader: "css-loader",
+                            options: {
+                                //保证import  style from css ,对类重新命名，防止css污染
+                                modules: true
+                            }
+                        }
+                    ],
+                },
+                {
+                    test: /\.svg$/,
+                    use: [
+                        "babel-loader",
+                        {
+                            loader: "react-svg-loader",
+                            options: {
+                                svgo: {
+                                    plugins: [
+                                        {removeTitle: false}
+                                    ],
+                                    floatPrecision: 2
+                                }
+                            }
+                        }
                     ]
                 }
             ]
         },
         plugins: [
-           // CopyWebpackPlugin
+            // CopyWebpackPlugin
             new MiniCssExtractPlugin({
                 filename: "[name].css",
                 chunkFilename: "../css/[id].css"
@@ -66,8 +92,7 @@ let MuliPackConfig = function () {
      * @private
      */
     let _addMainfest = function (pack) {
-        if(pack.entry.main  !== undefined)
-        {
+        if (pack.entry.main !== undefined) {
             return;
         }
         pack.plugins.filter(item => !(item.options.title === undefined))
@@ -119,34 +144,33 @@ let MuliPackConfig = function () {
         _addMainfest.call(this, pack);
         return me;
     };
-   me.forEach=function(fn)
-   {
-       _module.forEach(fn);
-       return me;
-   },
-    me.toPackage = function (flag = false) {
-        //写出清单文件
-        if (flag) {
-            console.log(JSON.stringify(_mainfest));
-            let _dir =path.resolve(__dirname, "../dist/assets");
-            console.log(_dir);
-            if (!fs.existsSync(_dir)) {
-                fs.mkdirSync(_dir, {recursive: true});
-            }
-            let _fileName = _dir + "/mainfest.json";
-            let _json=JSON.stringify(_mainfest, null, 2);
-            fs.writeFile(_fileName,_json, (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("模块清单保存成功！" + _fileName);
-
-                    }
+    me.forEach = function (fn) {
+        _module.forEach(fn);
+        return me;
+    },
+        me.toPackage = function (flag = false) {
+            //写出清单文件
+            if (flag) {
+                console.log(JSON.stringify(_mainfest));
+                let _dir = path.resolve(__dirname, "../dist/assets");
+                console.log(_dir);
+                if (!fs.existsSync(_dir)) {
+                    fs.mkdirSync(_dir, {recursive: true});
                 }
-            );
-        }
-        return _module;
-    };
+                let _fileName = _dir + "/mainfest.json";
+                let _json = JSON.stringify(_mainfest, null, 2);
+                fs.writeFile(_fileName, _json, (err) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log("模块清单保存成功！" + _fileName);
+
+                        }
+                    }
+                );
+            }
+            return _module;
+        };
     return me;
 };
 module.exports = MuliPackConfig();

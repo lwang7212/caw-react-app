@@ -1,18 +1,11 @@
-
-import React, { Component } from 'react'
-import neo4j from 'icons/neo-world.svg'
-import {IconContainer} from "./icons/IconContainer";
-
-const DocumentsIcon = props => (
-    <IconContainer
-        icon={neo4j}
-        width={28}
-        {...props}
-    />
-);
+/**
+ * 左侧布局导航
+ * Sidebar 左右结构
+ */
+import ReactDOM from "react-dom";
+import React from 'react';
+import SidebarNav from 'Components/SidebarNav';
 ReactDOM.render(
-    <DocumentsIcon text="this is icon" />,
+    <SidebarNav></SidebarNav>,
     document.getElementById('root')
 );
-
-

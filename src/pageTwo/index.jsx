@@ -1,5 +1,13 @@
 import ReactDOM from "react-dom";
 import React from "react";
+
+
+render(
+    <div>
+        <Button>Normal</Button>
+        <Button primary>Primary</Button>
+    </div>
+);
 function tick() {
     const element = (
         <div>
