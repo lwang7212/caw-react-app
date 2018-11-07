@@ -68,3 +68,33 @@ export const StyledMainTabWrap = styled.div`
   flex-grow: 1;
   height: 50vh;
 `;
+
+
+
+/**
+ * 侧边栏导航按钮
+ */
+export const StyledNavigationButton = styled.button`
+  background: transparent;
+  border: 0;
+  width: 80px;
+  line-height: 67px;
+  padding-top: 3px;
+  font-size: 28px;
+  &:focus {
+    outline: none;
+  }
+`;
+/**
+ * 侧边栏导航按钮容器
+ * @type {React.DetailedReactHTMLElement<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> | *}
+ */
+export const NavigationButtonContainer = styled.div`
+  min-height: 70px;
+  height: 70px;
+  background-color: ${props =>
+    !props.isOpen ? 'transparent' : props.theme.drawerBackground};
+  &:focus {
+    outline: none;
+  }
+`;
