@@ -7,6 +7,10 @@ const packs = MultiPackConfig
     .addDefault("pageOne", "多页面测试一")
     .addDefault("pageTwo", "多页面测试二")*/
     .addDefault("Navigation", "导航栏测试")
+    .addDefault("StateShareTest", "状态提升测试")
+    .addDefault("RefTest", "RefTest测试")
+    .addDefault("contextTest", "contextTest测试")
+
    /* .addDefault("helloD3", "d3js测试")
     .addDefault("pageLayout","react布局测试")*/
     .addDefault("styled-components-demo","样式组件demo")
