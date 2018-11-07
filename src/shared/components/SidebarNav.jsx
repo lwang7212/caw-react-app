@@ -1,26 +1,64 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {
+    StyledNavigationButton,
+    NavigationButtonContainer
+} from 'Components/buttons';
+
 import {
     StyledContainner,
-    StyledSideBar,
-    StyledSideNav,
-    StyledSideNavPop,
+    StyledSidebar,
+    StyledTabsWrapper,
+    StyledTopNav,
+    StyledBottomNav,
+    StyledDrawer,
     StyledMainTabWrap,
-    StyledNavigationButton,
-    NavigationButtonContainer,
 } from './styledSidebarNav';
+
+const Closing = 'CLOSING';
+const Closed = 'CLOSED';
+const Open = 'OPEN';
+const Opening = 'OPENING';
 
 /**
  * 导航控件第一版
  */
 class SidebarNav extends Component {
+
     state = {};
-    constructor (props) {
+
+    constructor(props) {
         super(props)
-        //this._onTransitionEnd = this.onTransitionEnd.bind(this)
+        this._onTransitionEnd = this.onTransitionEnd.bind(this)
     }
+
+    componentDidMount() {
+        this.setState({
+            transitionState: Closed
+        })
+    }
+
+    onTransitionEnd() {
+        if (this.transitionState === Closing) {
+            this.setState({
+                transitionState: Closed,
+                drawerContent: null
+            })
+        }
+        if (this.transitionState === Opening) {
+            this.setState({
+                transitionState: Open
+            })
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        console.log(nextProps);
+    }
+
     render() {
-        debugger;
-        let {onNavClick, topNavItems, bottomNavItems=[]} = this.props;
+        // debugger;
+        let {onNavClick, topNavItems, bottomNavItems = []} = this.props;
         /**
          * 构建左边导航组件
          * @param list
@@ -35,7 +73,13 @@ class SidebarNav extends Component {
                         title={item.title}
                         data-test-id={'drawer' + item.name}
                         key={item.name}
-                        onClick={() => onNavClick(item.name.toLowerCase())}
+                        onClick={() => {
+                            this.setState({
+                                transitionState: this.state.transitionState==Closed?Open:Closed,
+                                drawerContent: item.name.toLowerCase()
+                            });
+                            return onNavClick(item.name.toLowerCase());
+                        }}
                         isOpen={isOpen}
                     >
                         <StyledNavigationButton name={item.name}>
@@ -45,15 +89,59 @@ class SidebarNav extends Component {
                 )
             })
         };
+        /**
+         * 显示侧边栏导航区域详细信息
+         * @param openDrawer
+         * @returns {*}
+         */
+        const getContentToShow = openDrawer => {
+            if (openDrawer) {
+                let filteredList = topNavItems.concat(bottomNavItems).filter(item => {
+                    return item.name.toLowerCase() === openDrawer
+                });
 
+                //只有仅有一个是打开的
+                let TabContent = filteredList[0].content;
+                console.log(filteredList.length);
+                return <TabContent/>
+            }
+            return null
+        };
+        /**
+         * 顶部导航条
+         * @type {*}
+         */
         const topNavItemsList = buildNavList(topNavItems, this.state.drawerContent);
-        const bottomNavItemsList = buildNavList(bottomNavItems,this.state.drawerContent);
+        /**
+         * 底部导航条
+         * @type {*}
+         */
+        const bottomNavItemsList = buildNavList(bottomNavItems, this.state.drawerContent);
+
         return (
             <StyledContainner>
-                <StyledSideBar>
-                    <StyledSideNav>{topNavItemsList}</StyledSideNav>
-                    <StyledSideNavPop open={true}>StyledSideNavPop</StyledSideNavPop>
-                </StyledSideBar>
+                <StyledSidebar>
+                    <StyledTabsWrapper>
+                        <StyledTopNav>{topNavItemsList}</StyledTopNav>
+                        <StyledBottomNav>{bottomNavItemsList}</StyledBottomNav>
+                    </StyledTabsWrapper>
+                    <StyledDrawer
+                        open={
+                            this.state.transitionState === Open ||
+                            this.state.transitionState === Opening
+                        }
+                        ref={ref => {
+                            if (ref) {
+                                // Remove old listeners so we don't get multiple callbacks.
+                                // This function is called more than once with same html element
+                                ref.removeEventListener('transitionend', this._onTransitionEnd)
+                                ref.addEventListener('transitionend', this._onTransitionEnd)
+                            }
+                        }}
+                    >
+                        {getContentToShow(this.state.drawerContent)}
+                    </StyledDrawer>
+                </StyledSidebar>
                 <StyledMainTabWrap>StyledMainTabWrap</StyledMainTabWrap>
             </StyledContainner>
         );
