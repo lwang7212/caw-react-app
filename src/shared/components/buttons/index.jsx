@@ -5,8 +5,9 @@ import styled from 'styled-components'
 import { dim } from './constants'
 
 import SVGInline from 'react-svg-inline'
-
+import * as themes from 'styles/themes'
 import styles from './style.css'
+
 
 export class ToolTip extends Component {
   constructor (props) {
@@ -98,12 +99,14 @@ export const StyledNavigationButton = styled.button`
 export const NavigationButtonContainer = styled.li`
   min-height: 70px;
   height: 70px;
-  background-color: ${props =>
-    !props.isOpen ? 'transparent' : props.theme.drawerBackground};
+  background-color: ${function (props) {
+   
+    return !props.isOpen ? 'transparent' : themes.base.drawerBackground;
+}};
   &:focus {
     outline: none;
   }
-`
+`;
 
 const StyledFormButton = styled.button`
   color: ${props => props.theme.secondaryButtonText};

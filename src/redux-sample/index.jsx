@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import store from './store';
 import { addToCart }  from './actions/cart-actions';
 
@@ -16,3 +19,13 @@ store.dispatch(addToCart('Flour 1kg', 2, 110));
 store.dispatch(addToCart('Juice 2L', 1, 250));
 
 unsubscribe();
+
+
+const App = <h1>Redux Shopping Cart</h1>;
+
+ReactDOM.render(
+    <Provider store={store}>
+        { App }
+    </Provider> ,
+    document.getElementById('root')
+);

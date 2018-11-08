@@ -67,7 +67,8 @@ class SidebarNav extends Component {
          */
         const buildNavList = (list, selected) => {
             return list.map(item => {
-                const isOpen = item.name.toLowerCase() === selected;
+                let isOpen = item.name.toLowerCase() === selected && this.state.transitionState!=Closed;
+
                 return (
                     <NavigationButtonContainer
                         title={item.title}

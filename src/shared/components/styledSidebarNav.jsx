@@ -1,7 +1,8 @@
 /**
  * 页面布局样式
  */
-import React from 'react'
+import React from 'react';
+import * as themes from 'styles/themes'
 import styled from 'styled-components'
 
 /**
@@ -135,7 +136,7 @@ export const NavigationButtonContainer = styled.div`
   min-height: 70px;
   height: 70px;
   background-color: ${props =>
-    !props.isOpen ? 'transparent' : props.theme.drawerBackground};
+    !props.isOpen ? 'transparent' : themes.base.drawerBackground};
   &:focus {
     outline: none;
   }

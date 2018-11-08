@@ -43,6 +43,7 @@ const packs = MultiPackConfig
                 Utilities: path.resolve(__dirname, 'src/shared/utilities/'),
                 Components: path.resolve(__dirname, 'src/shared/components/'),
                 icons: path.resolve(__dirname, 'src/assets/icons'),
+                styles:path.resolve(__dirname, 'src/shared/styles'),
                 "css-style": path.resolve(__dirname, 'src/assets/css')
             }
         }
