@@ -1,34 +1,13 @@
 /**
- * 应用程序桌面
+ * 主界面入口
  */
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withBus } from 'react-suber'
 import { ThemeProvider } from 'styled-components'
-import * as themes from 'browser/styles/themes'
-import {
-  getTheme,
-  getCmdChar,
-  getBrowserSyncConfig
-} from 'shared/modules/settings/settingsDuck'
-import { FOCUS, EXPAND } from 'shared/modules/editor/editorDuck'
-import { useBrowserSync } from 'shared/modules/features/featuresDuck'
-import { getErrorMessage } from 'shared/modules/commands/commandsDuck'
-import { allowOutgoingConnections } from 'shared/modules/dbMeta/dbMetaDuck'
-import {
-  getActiveConnection,
-  getConnectionState,
-  getActiveConnectionData,
-  isConnected,
-  getConnectionData,
-  SILENT_DISCONNECT,
-  SWITCH_CONNECTION
-} from 'shared/modules/connections/connectionsDuck'
-import { toggle } from 'shared/modules/sidebar/sidebarDuck'
-import {
-  CONNECTION_ID,
-  INJECTED_DISCOVERY
-} from 'shared/modules/discovery/discoveryDuck'
+import * as themes from 'Components/styles/themes'
+
+
 import {
   StyledWrapper,
   StyledApp,

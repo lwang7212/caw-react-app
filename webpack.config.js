@@ -12,6 +12,8 @@ const packs = MultiPackConfig
     .addDefault("contextTest", "contextTest测试")
     .addDefault("todolist", "react-redux样例测试")
     .addDefault("redux-sample", "redux样例测试")
+    .addDefault("react-suber", "react-suber样例测试")
+    .addDefault("AppFrameWork", "Application框架测试")
    /* .addDefault("helloD3", "d3js测试")
     .addDefault("pageLayout","react布局测试")*/
     .addDefault("styled-components-demo","样式组件demo")

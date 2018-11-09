@@ -10,7 +10,9 @@ import {Provider} from 'react-redux';
 import {createBus} from 'suber';
 import {BusProvider} from 'react-suber';
 import styled from 'styled-components';
-import store from './store';
+
+const  store = createStore((state = [], action) => state,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 //todo test
 import {
     DocumentsIcon,
@@ -18,6 +20,9 @@ import {
     SettingsIcon
 }
     from 'Components/icons/Icons';
+import productsReducer from "../AppFrameWork/reducers/products-reducer";
+import cartReducer from "../AppFrameWork/reducers/cart-reducer";
+import {createStore} from "redux";
 
 // Create suber bus
 const bus = createBus()
