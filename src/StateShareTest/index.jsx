@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import React from "react";
-import SidebarNav from "Components/SidebarNav";
+import Index from "Components/Sidebar/index";
 
 function toCelsius(fahrenheit) {
     return (fahrenheit - 32) * 5 / 9;

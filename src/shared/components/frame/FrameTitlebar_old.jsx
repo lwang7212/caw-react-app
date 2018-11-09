@@ -1,9 +1,35 @@
-
+/*
+ * Copyright (c) 2002-2018 "Neo4j, Inc"
+ * Network Engine for Objects in Lund AB [http://neotechnology.com]
+ *
+ * This file is part of Neo4j.
+ *
+ * Neo4j is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import { withBus } from 'react-suber'
-
+import { saveAs } from 'file-saver'
+import * as editor from 'shared/modules/editor/editorDuck'
+import * as commands from 'shared/modules/commands/commandsDuck'
+import { cancel as cancelRequest } from 'shared/modules/requests/requestsDuck'
+import { remove, pin, unpin } from 'shared/modules/stream/streamDuck'
+import { removeComments } from 'shared/services/utils'
+import { FrameButton } from 'browser-components/buttons'
+import Render from 'browser-components/Render'
+import { CSVSerializer } from 'services/serializer'
 import {
   ExpandIcon,
   ContractIcon,
@@ -13,7 +39,7 @@ import {
   DownIcon,
   PinIcon,
   DownloadIcon
-} from 'Components/icons/Icons';
+} from 'browser-components/icons/Icons'
 import {
   StyledFrameTitleBar,
   StyledFrameCommand,
@@ -24,48 +50,61 @@ import {
   DropdownButton,
   DropdownItem
 } from './styled'
-import Render from "Components/Render";
-import {FrameButton} from "Components/buttons";
-
+import {
+  downloadPNGFromSVG,
+  downloadSVG
+} from 'shared/services/exporting/imageUtils'
+import {
+  stringifyResultArray,
+  transformResultRecordsToResultArray
+} from 'browser/modules/Stream/CypherFrame/helpers'
+import { csvFormat } from 'services/bolt/cypherTypesFormatting'
 
 class FrameTitlebar extends Component {
   hasData () {
     return this.props.numRecords > 0
   }
-
-    /**
-     * 导出csv
-     * @param records
-     */
   exportCSV (records) {
-
+    const exportData = stringifyResultArray(
+      csvFormat,
+      transformResultRecordsToResultArray(records)
+    )
+    let data = exportData.slice()
+    const csv = CSVSerializer(data.shift())
+    csv.appendRows(data)
+    var blob = new Blob([csv.output()], {
+      type: 'text/plain;charset=utf-8'
+    })
+    saveAs(blob, 'export.csv')
   }
-    /**
-     * 导出png
-     * @param records
-     */
   exportPNG () {
-
+    const { svgElement, graphElement, type } = this.props.visElement
+    downloadPNGFromSVG(svgElement, graphElement, type)
   }
-
-    /**
-     * 导出SVG
-     */
   exportSVG () {
-
+    const { svgElement, graphElement, type } = this.props.visElement
+    downloadSVG(svgElement, graphElement, type)
   }
   exportGrass (data) {
-
+    var blob = new Blob([data], {
+      type: 'text/plain;charset=utf-8'
+    })
+    saveAs(blob, 'style.grass')
   }
   canExport = () => {
-
-  };
+    let props = this.props
+    const { frame = {} } = props
+    return (
+      (frame.type === 'cypher' && (this.hasData() || props.visElement)) ||
+      (frame.type === 'style' && this.hasData())
+    )
+  }
   render () {
-    let props = this.props;
-    const { frame = {} } = props;
-    const fullscreenIcon = props.fullscreen ? <ContractIcon /> : <ExpandIcon />;
-    const expandCollapseIcon = props.collapse ? <DownIcon /> : <UpIcon />;
-    /*const cmd = removeComments(frame.cmd);*/
+    let props = this.props
+    const { frame = {} } = props
+    const fullscreenIcon = props.fullscreen ? <ContractIcon /> : <ExpandIcon />
+    const expandCollapseIcon = props.collapse ? <DownIcon /> : <UpIcon />
+    const cmd = removeComments(frame.cmd)
     return (
       <StyledFrameTitleBar>
         <StyledFrameCommand>
@@ -73,7 +112,7 @@ class FrameTitlebar extends Component {
             data-test-id='frameCommand'
             onClick={() => props.onTitlebarClick(frame.cmd)}
           >
-            cmd
+            {cmd}
           </DottedLineHover>
         </StyledFrameCommand>
         <FrameTitlebarButtonSection>
@@ -179,7 +218,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       isPinned ? dispatch(unpin(id)) : dispatch(pin(id))
     }
   }
-};
+}
 
 export default withBus(
   connect(

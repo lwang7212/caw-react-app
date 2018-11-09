@@ -1,26 +1,9 @@
-/*
- * Copyright (c) 2002-2018 "Neo4j, Inc"
- * Network Engine for Objects in Lund AB [http://neotechnology.com]
- *
- * This file is part of Neo4j.
- *
- * Neo4j is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * 框架容器模板
  */
-
 import React, { Component } from 'react'
-import FrameTitlebar from './FrameTitlebar'
-import Render from '../Render'
+import FrameTitlebar from 'Components/frame/FrameTitlebar'
+import Render from 'Components/Render'
 import {
   StyledFrame,
   StyledFrameBody,
@@ -39,6 +22,10 @@ class FrameTemplate extends Component {
       lastHeight: 10
     }
   }
+
+    /**
+     * 切换全屏
+     */
   toggleFullScreen () {
     this.setState(
       { fullscreen: !this.state.fullscreen },
@@ -51,6 +38,10 @@ class FrameTemplate extends Component {
         )
     )
   }
+
+    /**
+     * 切换折叠
+     */
   toggleCollapse () {
     this.setState(
       { collapse: !this.state.collapse },
@@ -63,6 +54,10 @@ class FrameTemplate extends Component {
         )
     )
   }
+
+    /**
+     * 切换pin状态
+     */
   togglePin () {
     this.setState(
       { pinned: !this.state.pinned },
@@ -90,9 +85,14 @@ class FrameTemplate extends Component {
       this.setState({ lastHeight: this.frameContentElement.clientHeight })
     }
   }
+
+    /**
+     * frame 内容
+     * @param el
+     */
   setFrameContentElement = el => {
     this.frameContentElement = el
-  }
+  };
   render () {
     return (
       <StyledFrame data-test-id='frame' fullscreen={this.state.fullscreen}>

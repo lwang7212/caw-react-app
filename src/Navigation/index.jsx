@@ -4,84 +4,109 @@
  */
 import ReactDOM from "react-dom";
 import React from 'react';
-import SidebarNav from 'Components/SidebarNav';
-import BookSearch from 'icons/book-search.svg'
-
+import Sidebar from 'Components/Sidebar';
+import FrameMain from 'Components/frame/FrameTemplate'
+import {Provider} from 'react-redux';
+import {createBus} from 'suber';
+import {BusProvider} from 'react-suber';
+import styled from 'styled-components';
+import store from './store';
+//todo test
 import {
     DocumentsIcon,
     CloudIcon,
     SettingsIcon
 }
-from 'Components/icons/Icons';
-import styled from "styled-components";
+    from 'Components/icons/Icons';
 
-
-const button = styled.button`
-  /* Adapt the colors based on primary prop */
-  background: ${props => props.primary ? "palevioletred" : "white"};
-  color: ${props => props.primary ? "white" : "palevioletred"};
-
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-`;
-
-
-const props={
-    onNavClick:(item)=>console.log(item),
-    topNavItems:[
+// Create suber bus
+const bus = createBus()
+const props = {
+    onNavClick: (item) => console.log(item),
+    topNavItems: [
         {
-            name:"Nav1",
-            title:"导航1",
-            isOpen:true,
-            icon:(isOpen)=><DocumentsIcon/>,
-            content:()=><button>导航1</button>,
+            name: "Nav1",
+            title: "导航1",
+            isOpen: true,
+            icon: (isOpen) => <DocumentsIcon/>,
+            content: () => <button>导航1</button>,
         },
         {
-            name:"Nav2",
-            title:"导航2",
-            isOpen:true,
-            icon:(isOpen)=><DocumentsIcon/>,
-            content:()=><button>导航2</button>,
+            name: "Nav2",
+            title: "导航2",
+            isOpen: true,
+            icon: (isOpen) => <DocumentsIcon/>,
+            content: () => <button>导航2</button>,
 
         },
         {
-            name:"Nav3",
-            title:"导航3",
-            isOpen:true,
-            icon:(isOpen)=><CloudIcon/>,
-            content:()=><button>导航3</button>,
+            name: "Nav3",
+            title: "导航3",
+            isOpen: true,
+            icon: (isOpen) => <CloudIcon/>,
+            content: () => <button>导航3</button>,
         },
         {
-            name:"Nav4",
-            title:"导航2",
-            isOpen:true,
-            icon:(isOpen)=><SettingsIcon/>,
-            content:()=><button>导航4</button>,
+            name: "Nav4",
+            title: "导航2",
+            isOpen: true,
+            icon: (isOpen) => <SettingsIcon/>,
+            content: () => <button>导航4</button>,
         },
     ],
-    bottomNavItems:[
+    bottomNavItems: [
         {
-            name:"Nav5",
-            title:"导航1",
-            isOpen:true,
-            icon:(isOpen)=><DocumentsIcon/>,
-            content:()=><button>导航5</button>,
+            name: "Nav5",
+            title: "导航1",
+            isOpen: true,
+            icon: (isOpen) => <DocumentsIcon/>,
+            content: () => <button>导航5</button>,
         },
         {
-            name:"Nav6",
-            title:"导航2",
-            isOpen:true,
-            icon:(isOpen)=><DocumentsIcon/>,
-            content:()=><button>导航6</button>,
+            name: "Nav6",
+            title: "导航2",
+            isOpen: true,
+            icon: (isOpen) => <DocumentsIcon/>,
+            content: () => <button>导航6</button>,
         },
 
     ]
 };
-
+/*const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  font-family: ${props => props.theme.primaryFontFamily};
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+`;*/
+export const StyledWrapper = styled.div`
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+    background: #d2d5da;
+`;
+export const StyledMainTabWrap = styled.div`
+  margin-left: 24px;
+  margin-top:17px; ;
+  margin-right: 24px;
+  width: auto;
+  height: 200px;
+  background: #ffffff;
+  flex-grow: 1;
+  height: 50vh;
+`;
 ReactDOM.render(
-   <SidebarNav {...props}></SidebarNav>,
+    <Provider store={store}>
+        <BusProvider bus={bus}>
+            <StyledWrapper>
+            <Sidebar {...props}></Sidebar>
+                <StyledMainTabWrap>
+            <FrameMain>FrameTemplate</FrameMain>
+                </StyledMainTabWrap>
+            </StyledWrapper>
+        </BusProvider>
+    </Provider>,
     document.getElementById('root')
 );
