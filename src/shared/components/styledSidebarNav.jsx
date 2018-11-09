@@ -2,34 +2,19 @@
  * 页面布局样式
  */
 import React from 'react';
-import * as themes from 'styles/themes'
-import styled from 'styled-components'
+import * as themes from 'styles/themes';
+import styled from 'styled-components';
 
 /**
  * 布局容器
  * @type {StyledComponentClass<JSX.IntrinsicElements["div"], Extract<keyof DefaultTheme, string> extends never ? any : DefaultTheme, JSX.IntrinsicElements["div"]>}
  */
-export const StyledContainner = styled.div`
+export const StyledContainer = styled.div`
     display: flex;
     align-items: stretch;
     height: 100vh;
     background: #d2d5da;
 `;
-/**
- * 左边侧边条
- * @type {StyledComponentClass<JSX.IntrinsicElements["div"], Extract<keyof DefaultTheme, string> extends never ? any : DefaultTheme, JSX.IntrinsicElements["div"]>}
- */
-/*export const StyledSideBar = styled.div`
-    flex: 0 0 auto;
-    height: 100vh;
-    flex-grow: 0;
-    flex: 0 0 auto;
-    background-color: #4c4957;
-    display: flex;
-    flex-direction: row;
-    border-right: 1px solid black;
-    color: #fff;
-    `;*/
 /**
  * 左边侧边条
  * @type {StyledComponentClass<JSX.IntrinsicElements["div"], Extract<keyof DefaultTheme, string> extends never ? any : DefaultTheme, JSX.IntrinsicElements["div"]>}
@@ -44,22 +29,21 @@ export const StyledSidebar = styled.div`
 `;
 
 /**
- * 侧边条第一级导航条
+ * 侧边条容器
  * @type {StyledComponentClass<JSX.IntrinsicElements["div"], Extract<keyof DefaultTheme, string> extends never ? any : DefaultTheme, JSX.IntrinsicElements["div"]>}
  */
-/*export const StyledTabsWrapper = styled.div`
- display: flex;
- flex-direction: column;
- width: 81px;
- `;*/
 export const StyledTabsWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+/**
+ * 侧边条内区域容器基类
+ * @type {StyledComponentClass<JSX.IntrinsicElements["ul"], Extract<keyof DefaultTheme, string> extends never ? any : DefaultTheme, JSX.IntrinsicElements["ul"]>}
+ */
 const StyledTabList = styled.ul`
   margin: 0;
   padding: 0;
-`
+`;
 /**
  * 侧边栏顶部导航
  * @type {StyledComponentClass<any, Extract<keyof DefaultTheme, string> extends never ? any : DefaultTheme, *> | *}
@@ -112,10 +96,27 @@ export const StyledMainTabWrap = styled.div`
   height: 50vh;
 `;
 
+/**
+ * 侧边栏导航按钮容器
+ * @type {React.DetailedReactHTMLElement<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> | *}
+ */
 
 
 /**
- * 侧边栏导航按钮
+ * 侧边栏导航按钮容器
+ * @type {StyledComponentClass<JSX.IntrinsicElements["li"], Extract<keyof DefaultTheme, string> extends never ? any : DefaultTheme, JSX.IntrinsicElements["li"]>}
+ */
+export const NavigationButtonContainer = styled.li`
+  min-height: 70px;
+  height: 70px;
+  background-color: ${props => !props.isOpen ? 'transparent' : themes.base.drawerBackground};
+  &:focus {
+    outline: none;
+  }
+`;
+/**
+ * 侧边栏导航条按钮
+ * @type {StyledComponentClass<JSX.IntrinsicElements["button"], Extract<keyof DefaultTheme, string> extends never ? any : DefaultTheme, JSX.IntrinsicElements["button"]>}
  */
 export const StyledNavigationButton = styled.button`
   background: transparent;
@@ -124,19 +125,6 @@ export const StyledNavigationButton = styled.button`
   line-height: 67px;
   padding-top: 3px;
   font-size: 28px;
-  &:focus {
-    outline: none;
-  }
-`;
-/**
- * 侧边栏导航按钮容器
- * @type {React.DetailedReactHTMLElement<React.LiHTMLAttributes<HTMLLIElement>, HTMLLIElement> | *}
- */
-export const NavigationButtonContainer = styled.div`
-  min-height: 70px;
-  height: 70px;
-  background-color: ${props =>
-    !props.isOpen ? 'transparent' : themes.base.drawerBackground};
   &:focus {
     outline: none;
   }

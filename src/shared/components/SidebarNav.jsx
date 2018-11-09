@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
 import {
-    StyledNavigationButton,
-    NavigationButtonContainer
-} from 'Components/buttons';
-
-import {
-    StyledContainner,
+    StyledContainer,
     StyledSidebar,
     StyledTabsWrapper,
     StyledTopNav,
     StyledBottomNav,
     StyledDrawer,
     StyledMainTabWrap,
+    NavigationButtonContainer,
+    StyledNavigationButton
 } from './styledSidebarNav';
 
 const Closing = 'CLOSING';
@@ -25,18 +22,16 @@ const Opening = 'OPENING';
 class SidebarNav extends Component {
 
     state = {};
-
     constructor(props) {
         super(props)
         this._onTransitionEnd = this.onTransitionEnd.bind(this)
     }
-
     componentDidMount() {
+        console.log("componentDidMount");
         this.setState({
             transitionState: Closed
         })
     }
-
     onTransitionEnd() {
         if (this.transitionState === Closing) {
             this.setState({
@@ -50,12 +45,10 @@ class SidebarNav extends Component {
             })
         }
     }
-
     componentWillReceiveProps(nextProps) {
-
+        console.log("componentWillReceiveProps");
         console.log(nextProps);
     }
-
     render() {
         // debugger;
         let {onNavClick, topNavItems, bottomNavItems = []} = this.props;
@@ -75,6 +68,7 @@ class SidebarNav extends Component {
                         data-test-id={'drawer' + item.name}
                         key={item.name}
                         onClick={() => {
+                            //todo 状态改变采用redux 方式
                             this.setState({
                                 transitionState: this.state.transitionState==Closed?Open:Closed,
                                 drawerContent: item.name.toLowerCase()
@@ -100,11 +94,17 @@ class SidebarNav extends Component {
                 let filteredList = topNavItems.concat(bottomNavItems).filter(item => {
                     return item.name.toLowerCase() === openDrawer
                 });
-
-                //只有仅有一个是打开的
-                let TabContent = filteredList[0].content;
-                console.log(filteredList.length);
-                return <TabContent/>
+                if(filteredList.length>0)
+                {
+                    //只有仅有一个是打开的
+                    let TabContent = filteredList[0].content;
+                    return <TabContent/>
+                }
+                else
+                {
+                    //没有打开的导航区域
+                    return null;
+                }
             }
             return null
         };
@@ -120,7 +120,7 @@ class SidebarNav extends Component {
         const bottomNavItemsList = buildNavList(bottomNavItems, this.state.drawerContent);
 
         return (
-            <StyledContainner>
+            <StyledContainer>
                 <StyledSidebar>
                     <StyledTabsWrapper>
                         <StyledTopNav>{topNavItemsList}</StyledTopNav>
@@ -132,9 +132,15 @@ class SidebarNav extends Component {
                             this.state.transitionState === Opening
                         }
                         ref={ref => {
+                            //组件被挂载后，回调函数被立即执行，回调函数的参数为该组件的具体实例
+                            //组件被卸载或者原有的ref属性本身发生变化时,回调也会被立即执行，此时回调函数参数为null，以确保内存不泄露
+                            console.log("this is ref   is null");
                             if (ref) {
+                                console.log("this is ref  funtion success call");
+                                console.log(ref);
                                 // Remove old listeners so we don't get multiple callbacks.
                                 // This function is called more than once with same html element
+                                //css 动画过结束>> transition的过渡回调函数
                                 ref.removeEventListener('transitionend', this._onTransitionEnd)
                                 ref.addEventListener('transitionend', this._onTransitionEnd)
                             }
@@ -144,7 +150,7 @@ class SidebarNav extends Component {
                     </StyledDrawer>
                 </StyledSidebar>
                 <StyledMainTabWrap>StyledMainTabWrap</StyledMainTabWrap>
-            </StyledContainner>
+            </StyledContainer>
         );
     }
 }
