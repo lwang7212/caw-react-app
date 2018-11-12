@@ -1,12 +1,24 @@
 {
   "presets": [
     [
-    "env",
-    {
-      "targets": {
-        "node": true
+      "env",
+      {
+        "targets": {
+          "node": true
+        }
       }
-    }
-  ], "stage-2","react"]
+    ],
+    "stage-2",
+    "react"
+  ],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true
 
+      }
+    ]
+  ]
 }

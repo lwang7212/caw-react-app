@@ -61,7 +61,7 @@ export const base = {
     inFrameBorder: '1px solid #e6e9ef',
     topicBorder: '1px solid #dadada',
 
-    // Frame
+    // widgets
     frameSidebarBackground: '#F8F9FB',
     frameTitlebarText: '#717172'
 }

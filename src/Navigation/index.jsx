@@ -5,7 +5,7 @@
 import ReactDOM from "react-dom";
 import React from 'react';
 import Sidebar from 'Components/Sidebar';
-import FrameMain from 'Components/frame/FrameTemplate'
+import FrameMain from "Components/widgets/FrameTemplate";
 import {Provider} from 'react-redux';
 import {createBus} from 'suber';
 import {BusProvider} from 'react-suber';
@@ -20,8 +20,7 @@ import {
     SettingsIcon
 }
     from 'Components/icons/Icons';
-import productsReducer from "../AppFrameWork/reducers/products-reducer";
-import cartReducer from "../AppFrameWork/reducers/cart-reducer";
+
 import {createStore} from "redux";
 
 // Create suber bus
@@ -77,15 +76,7 @@ const props = {
 
     ]
 };
-/*const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  font-family: ${props => props.theme.primaryFontFamily};
-  font-size: 13px;
-  -webkit-font-smoothing: antialiased;
-  overflow: hidden;
-`;*/
+
 export const StyledWrapper = styled.div`
     display: flex;
     align-items: stretch;

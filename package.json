@@ -15,9 +15,11 @@
   "license": "ISC",
   "devDependencies": {
     "@types/styled-components": "^4.0.3",
+    "atool-build": "^1.0.2",
     "babel-cli": "^6.0.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-import": "^1.11.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-styled-components": "^1.8.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
@@ -36,6 +38,8 @@
     "file-loader": "^2.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.4",
     "raw-loader": "^0.5.1",
     "react": "^16.6.0",
@@ -50,13 +54,17 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "antd": "^3.10.7",
+    "file-saver": "^2.0.0-rc.4",
     "react-d3-components": "^0.9.1",
     "react-redux": "^5.1.0",
     "react-suber": "^1.0.4",
     "react-svg-inline": "^2.1.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.5",
+    "redux-logger": "^3.0.6",
     "style-loader": "^0.23.1",
-    "suber": "^5.0.1"
+    "suber": "^5.0.1",
+    "url-parse": "^1.4.4"
   }
 }

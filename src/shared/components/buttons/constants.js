@@ -6,7 +6,7 @@ export const font = {};
 export const dim = {
     // Editor bar
     editorbarHeight: 71,
-    // Frame
+    // widgets
     frameBodyHeight: 550,
     frameTitlebarHeight: 39,
     frameStatusbarHeight: 39,

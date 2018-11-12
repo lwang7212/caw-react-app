@@ -28,19 +28,22 @@ const baseConf = function () {
                     }
                 },
                 {
-                    test: /\.html$/,
-                    /*
-                    //
-                    use: [
-                         {
-                             loader: "html-loader",
-                             options: {
-                                 minimize: true,
-                             }
-                         }
-                     ]*/
+                    test: /\.html$/
                 },
+                {
+                    test: /\.less$/,
+                    use: [
 
+                        'style-loader', "css-loader",
+                        {
+                            loader: 'less-loader', // compiles Less to CSS
+                            options: {
+                                modules: true,
+                                javascriptEnabled: true
+                            }
+                        }]
+
+                },
                 {
                     test: /\.css$/,
                     use: [
